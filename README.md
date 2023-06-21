@@ -7,6 +7,12 @@
 
 以解决从高德/百度平台获取数据时忘记进行坐标矫正后，可能出现的问题
 
+以下为深圳某区域轨迹校正前后的比较（该轨迹通过高德骑行规划获取）
+![校正前](before.png)
+![校正后](after.png)
+
+
+
 ## Python库
 
 ### 安装
@@ -52,4 +58,4 @@ wgsc.correct_core(input_shp, output_shp, t_func)
 
 考虑到兼容性问题，工具箱逐个读取坐标、逐个转换，没有用numpy，速度比wgs_correction库更慢
 
-如果要转换比较大的数据，建议适用wgs_correction库
+如果要校正比较大的数据，建议适用wgs_correction库
