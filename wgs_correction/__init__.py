@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 import os.path
-
 import numpy as np
 import inspect
 import fiona
 import warnings
 from typing import Callable
 
-__all__ = ['rec_core', 'rec']
+__all__ = ['correct_core', 'correct']
 
 x_pi = 3.14159265358979324 * 3000.0 / 180.0
 pi = 3.1415926535897932384626  # π
@@ -168,7 +167,7 @@ def check_func(tran_func: Callable) -> None:
     assert params_count == 2, "自定义函数参数数目必须为2"
 
 
-def rec_core(input_shp:str, output_shp:str, tran_func: Callable) -> None:
+def correct_core(input_shp:str, output_shp:str, tran_func: Callable) -> None:
     """
     shapefile坐标纠正核函数，支持自定义转换函数传入
     :param input_shp: 输入shapefile
@@ -187,19 +186,19 @@ def rec_core(input_shp:str, output_shp:str, tran_func: Callable) -> None:
 
 
 
-def rec(input_shp:str, output_shp:str, rec_type: str = 'gd') -> None:
+def correct(input_shp:str, output_shp:str, corr_type: str = 'gd') -> None:
     """
     shapefile坐标纠正
     :param input_shp: 输入shapefile
     :param output_shp: 输出shapefile
-    :param rec_type: 转换类型， bd 或 gd
+    :param corr_type: 转换类型， bd 或 gd
     :return:
     """
-    if rec_type == 'bd':
+    if corr_type == 'bd':
         tran_func = CoordTrans.bd09towgs84
-    elif rec_type == 'gd':
+    elif corr_type == 'gd':
         tran_func = CoordTrans.gcj02towgs84
     else:
-        raise NotImplementedError('Unknown rectification type')
-    rec_core(input_shp, output_shp, tran_func)
+        raise NotImplementedError('Unknown correction type')
+    correct_core(input_shp, output_shp, tran_func)
 
