@@ -58,4 +58,4 @@ wgsc.correct_core(input_shp, output_shp, t_func)
 
 考虑到兼容性问题，工具箱逐个读取坐标、逐个转换，没有用numpy，速度比wgs_correction库更慢
 
-如果要校正比较大的数据，建议适用wgs_correction库
+如果要校正比较大的数据，建议使用wgs_correction库
