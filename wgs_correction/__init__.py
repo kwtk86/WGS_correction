@@ -41,8 +41,6 @@ class CoordTrans:
         :param lat:火星坐标系纬度
         :return:
         """
-        # if CoordTrans.out_of_china(lng, lat):
-        #     return lng, lat
         dlat = CoordTrans.transformlat(lng - 105.0, lat - 35.0)
         dlng = CoordTrans.transformlng(lng - 105.0, lat - 35.0)
         radlat = lat / 180.0 * pi
@@ -84,19 +82,6 @@ class CoordTrans:
                 np.sin(lng / 30.0 * pi)) * 2.0 / 3.0
         return ret
 
-    @staticmethod
-    def out_of_china(lng, lat):
-        """
-        判断是否在国内，不在国内不做偏移
-        :param lng:
-        :param lat:
-        :return:
-        """
-        if lng < 72.004 or lng > 137.8347:
-            return True
-        if lat < 0.8293 or lat > 55.8271:
-            return True
-        return False
 
 def trans(features: list, output_shp: str, meta: dict, tran_func: Callable):
 
